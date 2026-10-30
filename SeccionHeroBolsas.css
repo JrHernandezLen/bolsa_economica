@@ -1,0 +1,81 @@
+.contenedor-bolsas {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px; /* Reducimos el gap fijo para evitar que empuje hacia afuera */
+    margin: 40px auto 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 10px;
+    perspective: 1000px;
+    box-sizing: border-box;
+}
+
+/* Permitimos que las imágenes se reduzcan según la pantalla */
+.contenedor-bolsas img {
+    width: 30%; /* Cada bolsa toma un porcentaje del total para adaptarse */
+    max-width: 230px; 
+    min-width: 80px; /* Tamaño mínimo para que no desaparezcan */
+    height: auto;
+    flex-shrink: 1; /* Permite que las imágenes se encoggan juntas */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease;
+    object-fit: contain;
+}
+
+/* Bolsa Centro */
+.hero-imagen .bolsa-centro {
+    z-index: 2;
+    filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.25));
+}
+
+/* Bolsas Laterales */
+.hero-imagen .bolsa-lateral {
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+}
+
+/* Inclinaciones corregidas (quitamos margins que desbordan) */
+.bolsa-izq {
+    transform: translateY(-10px) rotate(8deg) scale(0.9) !important;
+}
+
+.bolsa-der {
+    transform: translateY(-10px) rotate(-8deg) scale(1.1) !important;
+}
+
+/* EFECTOS HOVER */
+.hero-imagen .bolsa-centro:hover {
+    transform: scale(1.08) !important;
+    z-index: 5;
+}
+
+.hero-imagen .bolsa-izq:hover {
+    transform: translateY(-15px) rotate(0deg) scale(1) !important;
+    z-index: 5;
+}
+
+.hero-imagen .bolsa-der:hover {
+    transform: translateY(-15px) rotate(0deg) scale(1.15) !important;
+    z-index: 5;
+}
+
+
+/* --- ADAPTACIÓN RESPONSIVA PARA PANTALLAS PEQUEÑAS (MÓVILES) --- */
+@media (max-width: 600px) {
+    .contenedor-bolsas {
+        gap: 5px; /* Ajuste estrecho para móviles */
+        padding: 0 5px;
+    }
+
+    /* Reducimos la inclinación y escala en móvil para que quepan completas */
+    .bolsa-izq {
+        transform: translateY(-5px) rotate(5deg) scale(0.85) !important;
+    }
+
+    .bolsa-der {
+        transform: translateY(-5px) rotate(-5deg) scale(0.95) !important;
+    }
+}
