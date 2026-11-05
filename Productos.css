@@ -4,6 +4,16 @@
     padding: 40px 5%;
 }
 
+.productos-seccion > h2 {
+    display: block;
+    width: 100%;
+    margin: 0 auto 40px;
+    text-align: center !important;
+    text-decoration: underline;
+    
+    
+}
+
 .productos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -11,167 +21,177 @@
     margin-bottom: 40px;
 }
 
+/* =========================================
+   TARJETA (ahora es un enlace <a>)
+========================================= */
 .producto-tarjeta {
-    position: relative; /* Esencial para posicionar la línea dentro de la tarjeta */
-    overflow: hidden;   /* Mantiene la línea dentro de las esquinas redondeadas */
+    --color-tarjeta: var(--color-primario);
+    --sombra-tarjeta: rgba(2, 62, 138, 0.2);
+
+    display: block;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    color: inherit;
     background-color: var(--color-blanco);
+    border: 2px solid transparent;
     border-radius: 10px;
     padding: 20px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Configuración general */
-.producto-tarjeta {
-    border: 2px solid transparent;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* 1. Econobolsa (Roja) */
-.producto-tarjeta:nth-child(1):hover {
-    border-color: #e53935;
-    box-shadow: 0 10px 20px rgba(229, 57, 53, 0.2);
+/* Permite que el "levantar" del hover funcione junto con animate.css */
+.producto-tarjeta.animate__animated {
+    animation-fill-mode: backwards;
 }
 
-/* 2. Bolsa Ecológica (Verde) */
-.producto-tarjeta:nth-child(2):hover {
-    border-color: #4caf50;
-    box-shadow: 0 10px 20px rgba(76, 175, 80, 0.2);
-}
-
-/* 3. Bolsa Tipo Sobre (Negra/Gris) */
-.producto-tarjeta:nth-child(3):hover {
-    border-color: #333333;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* 4. Bolsa con Asa Azul (Azul) */
-.producto-tarjeta:nth-child(4):hover {
-    border-color: #1e88e5;
-    box-shadow: 0 10px 20px rgba(30, 136, 229, 0.2);
-}
-
-/* 5. Bolsa con Diseño (Naranja) */
-.producto-tarjeta:nth-child(5):hover {
-    border-color: #ff9800;
-    box-shadow: 0 10px 20px rgba(255, 152, 0, 0.2);
-}
-
-/* 6. Bolsa Laminada (Gris Metal) */
-.producto-tarjeta:nth-child(6):hover {
-    border-color: #78909c;
-    box-shadow: 0 10px 20px rgba(120, 144, 156, 0.2);
-}
-
-
-/* 1. Econobolsa (Rojo) */
-.producto-tarjeta:nth-child(1):hover h3,
-.producto-tarjeta:nth-child(1):hover .precio {
-    color: #e53935;
-}
-
-/* 2. Bolsa Ecológica (Verde) */
-.producto-tarjeta:nth-child(2):hover h3,
-.producto-tarjeta:nth-child(2):hover .precio {
-    color: #4caf50;
-}
-
-/* 3. Bolsa Tipo Sobre (Negro / Gris oscuro) */
-.producto-tarjeta:nth-child(3):hover h3,
-.producto-tarjeta:nth-child(3):hover .precio {
-    color: #212121;
-}
-
-/* 4. Bolsa con Asa Azul (Azul) */
-.producto-tarjeta:nth-child(4):hover h3,
-.producto-tarjeta:nth-child(4):hover .precio {
-    color: #1e88e5;
-}
-
-/* 5. Bolsa con Diseño (Azul Marino / Naranja) */
-.producto-tarjeta:nth-child(5):hover h3,
-.producto-tarjeta:nth-child(5):hover .precio {
-    color: #1565c0;
-}
-
-/* 6. Bolsa Laminada (Gris Metálico) */
-.producto-tarjeta:nth-child(6):hover h3,
-.producto-tarjeta:nth-child(6):hover .precio {
-    color: #607d8b;
-}
-
-/* Transición suave para que el cambio de color no sea brusco */
-.producto-tarjeta h3,
-.producto-tarjeta .precio {
-    transition: color 0.3s ease;
-}
-
+/* Línea inferior que se despliega al hover */
 .producto-tarjeta::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 5px; /* Grosor de la línea */
-    background-color: black; /* O la variable del color de tu marca */
-    opacity: 0.35; /* Hace la línea semi-transparente para que sea sutil */
-    transform: scaleX(0); /* Nace desde el centro/lado comprimida */
+    height: 5px;
+    background-color: var(--color-tarjeta);
+    opacity: 0.6;
+    transform: scaleX(0);
     transition: transform 0.3s ease;
 }
 
 .producto-tarjeta:hover {
     transform: translateY(-8px);
-   box-shadow: 0 10px 25px rgba(243, 112, 33, 0.25);
+    border-color: var(--color-tarjeta);
+    box-shadow: 0 10px 20px var(--sombra-tarjeta);
 }
 
 .producto-tarjeta:hover::after {
-    transform: scaleX(1); /* Despliega la línea suavemente de extremo a extremo */
+    transform: scaleX(1);
 }
 
+/* Accesibilidad: foco con teclado */
+.producto-tarjeta:focus-visible {
+    outline: 3px solid var(--color-secundario);
+    outline-offset: 4px;
+}
+
+/* =========================================
+   COLOR DE CADA TARJETA
+========================================= */
+/* 1. Econobolsa (Rojo) */
+.producto-tarjeta:nth-child(1) {
+    --color-tarjeta: #e53935;
+    --sombra-tarjeta: rgba(229, 57, 53, 0.2);
+}
+
+/* 2. Bolsa Ecológica (Verde) */
+.producto-tarjeta:nth-child(2) {
+    --color-tarjeta: #4caf50;
+    --sombra-tarjeta: rgba(76, 175, 80, 0.2);
+}
+
+/* 3. Bolsa Tipo Sobre (Negro / Gris oscuro) */
+.producto-tarjeta:nth-child(3) {
+    --color-tarjeta: #333333;
+    --sombra-tarjeta: rgba(0, 0, 0, 0.2);
+}
+
+/* 4. Bolsa con Asa Azul (Azul) */
+.producto-tarjeta:nth-child(4) {
+    --color-tarjeta: #1e88e5;
+    --sombra-tarjeta: rgba(30, 136, 229, 0.2);
+}
+
+/* 5. Bolsa con Diseño (Naranja) */
+.producto-tarjeta:nth-child(5) {
+    --color-tarjeta: #ff9800;
+    --sombra-tarjeta: rgba(255, 152, 0, 0.2);
+}
+
+/* 6. Bolsa Laminada (Gris metal) */
+.producto-tarjeta:nth-child(6) {
+    --color-tarjeta: #78909c;
+    --sombra-tarjeta: rgba(120, 144, 156, 0.2);
+}
+
+/* =========================================
+   CONTENIDO DE LA TARJETA
+========================================= */
 .producto-tarjeta img {
     width: 100%;
     height: 200px;
     object-fit: contain;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 15px;
     border-radius: 5px;
-    margin-bottom: 15px;
 }
 
 .producto-tarjeta h3 {
-
     font-size: 1.7rem;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     letter-spacing: 2px;
     color: black;
-    margin-bottom: 10px;
-    
+    margin-bottom: 14px;
+    transition: color 0.3s ease;
 }
 
-.producto-tarjeta .precio {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: rgb(231, 234, 238);
+.producto-tarjeta:hover h3 {
+    color: var(--color-tarjeta);
 }
 
+/* Texto tipo botón (reemplaza al precio) */
+.producto-tarjeta .ver-mas {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 2px solid var(--color-primario);
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-primario);
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.producto-tarjeta .ver-mas i {
+    display: inline-block;
+    font-style: normal;
+    transition: transform 0.3s ease;
+}
+
+.producto-tarjeta:hover .ver-mas {
+    background: var(--color-tarjeta);
+    border-color: var(--color-tarjeta);
+    color: #fff;
+}
+
+.producto-tarjeta:hover .ver-mas i {
+    transform: translateX(5px);
+}
+
+/* =========================================
+   BOTÓN "VER TODOS LOS PRODUCTOS"
+========================================= */
 .btn-contenedor {
     text-align: center;
 }
 
 .btn-primario {
-    background-color: var(--color-primario);
+    background-color: white;
     color: var(--color-blanco);
+     border: 2px solid var(--color-primario);
     padding: 15px 40px;
     border-radius: 5px;
     font-weight: 700;
     font-size: 1.1rem;
     transition: background 0.3s ease;
     display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.btn-primario:hover { transform: translateY(-6px); box-shadow: var(--sombra-hover); }
+
 .btn-primario:hover {
-    background-color: var(--color-secundario);
+    background-color: rgb(115, 236, 115);
 }

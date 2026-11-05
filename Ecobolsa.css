@@ -1,0 +1,320 @@
+/* =========================================================
+   Ecobolsa.css  -  versión responsive
+   ========================================================= */
+ 
+/* ---------- Contenedor principal ---------- */
+.eco {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 30px clamp(16px, 5vw, 80px) 70px;
+}
+ 
+/* ---------- Migas de pan ---------- */
+.migas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-bottom: 30px;
+    padding: 0;
+    font-size: 0.9rem;
+    color: #64748b;
+    background: none;
+    box-shadow: none;
+}
+.migas a { color: var(--color-primario); font-weight: 600; }
+.migas a:hover { color: var(--color-secundario); }
+.migas [aria-current] { color: var(--color-texto); font-weight: 600; }
+ 
+/* ---------- Producto ---------- */
+.eco-producto {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(24px, 4vw, 60px);
+    align-items: start;
+    margin-bottom: clamp(40px, 6vw, 80px);
+}
+ 
+/* ---------- Galería ---------- */
+.eco-imagen-principal {
+    background: var(--color-blanco);
+    border-radius: 16px;
+    padding: clamp(14px, 3vw, 30px);
+    box-shadow: var(--sombra);
+}
+ 
+.eco-imagen-principal img {
+    width: 100%;
+    height: clamp(260px, 38vw, 520px);
+    object-fit: contain;
+    transition: transform 0.4s ease;
+}
+.eco-imagen-principal:hover img { transform: scale(1.05); }
+ 
+/* Selector Lisa / Personalizada */
+.eco-vista {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+ 
+.vista-btn {
+    padding: 8px 20px;
+    border: 2px solid var(--color-primario);
+    border-radius: 50px;
+    background: var(--color-blanco);
+    color: var(--color-primario);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease,
+                transform 0.3s ease, box-shadow 0.3s ease;
+}
+.vista-btn:hover { transform: translateY(-6px); box-shadow: var(--sombra-hover); }
+.vista-btn.activa {
+    background: var(--color-primario);
+    color: #fff;
+}
+ 
+/* Miniaturas */
+.eco-miniaturas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+ 
+.miniatura {
+    width: 76px;
+    height: 76px;
+    padding: 6px;
+    background: var(--color-blanco);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    box-shadow: var(--sombra);
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.miniatura:hover { transform: translateY(-3px); }
+.miniatura.activa { border-color: var(--color-primario); }
+.miniatura img { width: 100%; height: 100%; object-fit: contain; }
+ 
+/* ---------- Información ---------- */
+.eco-etiqueta {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 5px 14px;
+    background: var(--color-acento);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 50px;
+}
+ 
+.eco-info h1 {
+    font-size: clamp(1.7rem, 4vw, 2.2rem);
+    letter-spacing: 2px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+ 
+.eco-descripcion {
+    font-size: 1.05rem;
+    color: #555;
+    margin-bottom: 26px;
+}
+ 
+/* Ficha técnica */
+.eco-ficha {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+    padding: 0;
+}
+ 
+.eco-ficha li {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 16px;
+    background: var(--color-blanco);
+    border-left: 4px solid var(--color-secundario);
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+}
+.eco-ficha span {
+    font-size: 0.8rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.eco-ficha strong { color: var(--color-texto); }
+ 
+/* Colores */
+.eco-colores { margin-bottom: 32px; }
+.eco-colores p { font-weight: 700; margin-bottom: 10px; }
+ 
+.eco-muestras { display: flex; flex-wrap: wrap; gap: 12px; }
+ 
+.muestra {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 3px solid var(--color-blanco);
+    box-shadow: 0 0 0 1px #cbd5e1, var(--sombra);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.muestra:hover { transform: scale(1.18); }
+ 
+/* ---------- Botones ---------- */
+.eco-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+}
+ 
+.eco-acciones .btn-primario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.eco-acciones svg,
+.eco-acciones img {
+    width: 30px;
+    height: 32px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+ 
+.eco-secundario {
+    flex: 1 1 200px;               /* crece y baja de línea si no cabe */
+    display: inline-flex;
+    flex-direction: row-reverse;   /* icono a la izquierda del texto */
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 24px;
+    border: 2px solid var(--color-primario);
+    border-radius: 5px;
+    font-weight: 700;
+    color: var(--color-primario);
+    transition: background 0.3s ease, color 0.3s ease,
+                transform 0.3s ease, box-shadow 0.3s ease;
+}
+.eco-secundario:hover { transform: translateY(-6px); box-shadow: var(--sombra-hover); }
+ 
+/* ---------- Ventajas ---------- */
+.eco-ventajas {
+    text-align: center;
+    margin-bottom: clamp(40px, 6vw, 80px);
+}
+ 
+.eco-ventajas h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: var(--color-primario);
+    margin-bottom: 35px;
+}
+ 
+.ventajas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+ 
+.ventaja {
+    background: var(--color-blanco);
+    border-radius: 14px;
+    padding: 30px 22px;
+    box-shadow: var(--sombra);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.ventaja:hover { transform: translateY(-6px); box-shadow: var(--sombra-hover); }
+ 
+.ventaja-icono {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: rgba(0, 180, 216, 0.12);
+    color: var(--color-primario);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+ 
+.ventaja-icono svg,
+.ventaja-icono img {
+    width: 32px;
+    height: 32px;
+}
+ 
+.ventaja:hover .ventaja-icono {
+    background: #bccee8;
+    color: #fff;
+}
+.ventaja h3 { color: var(--color-primario); margin-bottom: 8px; }
+.ventaja p { color: #555; font-size: 0.95rem; }
+ 
+/* ---------- Llamado final ---------- */
+.eco-cta {
+    text-align: center;
+    color: #fff;
+    border-radius: 18px;
+    padding: clamp(50px, 10vw, 100px) clamp(16px, 4vw, 50px);
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+        url("Imagenes/publicidadgemini.jpg") center 70% / cover no-repeat;
+}
+.eco-cta h2 { font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: 8px; }
+.eco-cta p { margin-bottom: 26px; font-size: 1.1rem; }
+.eco-cta .btn-primario { background: var(--color-acento); }
+.eco-cta .btn-primario:hover { background: #e06c00; }
+ 
+/* ---------- Animación al hacer scroll ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+ 
+.reveal.visible {
+    opacity: 1;
+    transform: none;
+}
+ 
+/* Tarjetas: conservan el hover después de aparecer */
+.ventaja.reveal {
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+}
+.ventaja.reveal.visible:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--sombra-hover);
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+ 
+/* ---------- Tablet ---------- */
+@media (max-width: 800px) {
+    .eco-producto { grid-template-columns: 1fr; }
+}
+ 
+/* ---------- Móvil ---------- */
+@media (max-width: 480px) {
+    .eco-ficha { grid-template-columns: 1fr; }
+    .miniatura { width: 62px; height: 62px; }
+    .eco-secundario { flex-basis: 100%; }
+}

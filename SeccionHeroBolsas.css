@@ -1,81 +1,78 @@
+/* =========================================
+   SECCIÓN HERO / BOLSAS EN FLOTACIÓN (FORZADO)
+========================================= */
+
 .contenedor-bolsas {
-    display: flex;
-    flex-direction: row;
+    display: flex !important;
+    flex-direction: row !important;
     justify-content: center;
     align-items: flex-end;
-    gap: 10px; /* Reducimos el gap fijo para evitar que empuje hacia afuera */
+    gap: 15px;
     margin: 40px auto 20px;
     width: 100%;
     max-width: 1200px;
     padding: 0 10px;
-    perspective: 1000px;
     box-sizing: border-box;
 }
 
-/* Permitimos que las imágenes se reduzcan según la pantalla */
 .contenedor-bolsas img {
-    width: 30%; /* Cada bolsa toma un porcentaje del total para adaptarse */
+    width: 30%;
     max-width: 230px; 
-    min-width: 80px; /* Tamaño mínimo para que no desaparezcan */
+    min-width: 80px;
     height: auto;
-    flex-shrink: 1; /* Permite que las imágenes se encoggan juntas */
+    flex-shrink: 1;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    transition: all 0.3s ease;
     object-fit: contain;
 }
 
-/* Bolsa Centro */
-.hero-imagen .bolsa-centro {
+/* --- APLICACIÓN DIRECTA DE LA ANIMACIÓN --- */
+.bolsa-izq {
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    animation: levitarIzq 3s ease-in-out infinite alternate !important;
+}
+
+.bolsa-centro {
     z-index: 2;
     filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.25));
-}
-
-/* Bolsas Laterales */
-.hero-imagen .bolsa-lateral {
-    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
-}
-
-/* Inclinaciones corregidas (quitamos margins que desbordan) */
-.bolsa-izq {
-    transform: translateY(-10px) rotate(8deg) scale(0.9) !important;
+    animation: levitarCentro 3.4s ease-in-out infinite alternate 0.5s !important;
 }
 
 .bolsa-der {
-    transform: translateY(-10px) rotate(-8deg) scale(1.1) !important;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    animation: levitarDer 3.2s ease-in-out infinite alternate 1s !important;
 }
 
-/* EFECTOS HOVER */
-.hero-imagen .bolsa-centro:hover {
-    transform: scale(1.08) !important;
-    z-index: 5;
-}
-
-.hero-imagen .bolsa-izq:hover {
-    transform: translateY(-15px) rotate(0deg) scale(1) !important;
-    z-index: 5;
-}
-
-.hero-imagen .bolsa-der:hover {
-    transform: translateY(-15px) rotate(0deg) scale(1.15) !important;
-    z-index: 5;
-}
-
-
-/* --- ADAPTACIÓN RESPONSIVA PARA PANTALLAS PEQUEÑAS (MÓVILES) --- */
-@media (max-width: 600px) {
-    .contenedor-bolsas {
-        gap: 5px; /* Ajuste estrecho para móviles */
-        padding: 0 5px;
+/* --- KEYFRAMES --- */
+@keyframes levitarIzq {
+    0% {
+        transform: translateY(0px) rotate(8deg) scale(0.9);
     }
-
-    /* Reducimos la inclinación y escala en móvil para que quepan completas */
-    .bolsa-izq {
-        transform: translateY(-5px) rotate(5deg) scale(0.85) !important;
+    100% {
+        transform: translateY(-25px) rotate(8deg) scale(0.9);
     }
+}
 
-    .bolsa-der {
-        transform: translateY(-5px) rotate(-5deg) scale(0.95) !important;
+@keyframes levitarCentro {
+    0% {
+        transform: translateY(2px) scale(1);
     }
+    100% {
+        transform: translateY(-10px) scale(1);
+    }
+}
+
+@keyframes levitarDer {
+    0% {
+        transform: translateY(0px) rotate(-8deg) scale(1.1);
+    }
+    100% {
+        transform: translateY(-45px) rotate(-8deg) scale(1.1);
+    }
+}
+
+/* Hover */
+.bolsa-izq:hover, .bolsa-centro:hover, .bolsa-der:hover {
+    animation-play-state: paused !important;
 }

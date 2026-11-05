@@ -1,8 +1,6 @@
-
 .destacado.info-bolsas {
     position: relative;
-    overflow: hidden !important;
-    padding: 50px 5%;
+    padding: 100px 5%;
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -12,14 +10,14 @@
     box-sizing: border-box;
 }
 
-/* 2. Estructura y Animación de las Imágenes (Centradas) */
+/* 2. Estructura e Imagen Centrada con Sombra */
 .carrusel-fondo {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Al fondo */
+    z-index: 1;
 }
 
 .slide-fondo {
@@ -28,15 +26,19 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: contain;
-    background-position: center center !important; /* Centra la bolsa perfectamente */
+    background-size: 260px auto !important;
+    background-position: center center !important;
     background-repeat: no-repeat;
+
+    /* Sombra alrededor de la silueta de la bolsa */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6)) !important;
+
     opacity: 0;
     transform: translateX(-100%);
     transition: transform 1s ease-in-out, opacity 1s ease-in-out;
 }
 
-/* Transiciones activadas por el JavaScript */
+/* Transiciones de JavaScript */
 .slide-fondo.active {
     opacity: 1 !important;
     transform: translateX(0) !important;
@@ -47,7 +49,7 @@
     transform: translateX(100%) !important;
 }
 
-/* 3. Capa Azul Degradada (Permite ver la bolsa del centro) */
+/* 3. Capa Azul Degradada (suave en el centro para resaltar la bolsa) */
 .capa-oscura {
     position: absolute;
     top: 0;
@@ -55,46 +57,45 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(
-        90deg, 
-        rgba(2, 62, 138, 0.88) 0%, 
-        rgba(2, 62, 138, 0.35) 50%, 
-        rgba(2, 62, 138, 0.88) 100%
+        90deg,
+        rgba(125, 163, 213, 0.92) 0%,
+        rgba(2, 62, 138, 0.25) 50%,
+        rgba(42, 105, 187, 0.92) 100%
     );
-    z-index: 2; /* Sobre la bolsa, debajo del texto */
+    z-index: 2;
     pointer-events: none;
 }
 
-/* 4. Textos Organizados (Invertido en PC y Controlado sin Desbordes) */
+/* 4. Textos a los lados sin invadir la bolsa */
 .destacado.info-bolsas .contenido-destacado {
     position: relative;
-    z-index: 3; /* Al frente de todo */
+    z-index: 3;
     width: 100%;
-    max-width: 1000px; /* Ancho máximo para evitar desbordes en monitores grandes */
+    max-width: 1000px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: row-reverse; /* Título pasa a la DERECHA y Párrafo a la IZQUIERDA */
-    justify-content: space-between;
+    display: grid;
+    /* texto | espacio reservado para la bolsa | texto */
+    grid-template-columns: 1fr 280px 1fr;
+    column-gap: 20px;
     align-items: center;
-    gap: 40px;
     box-sizing: border-box;
 }
 
-/* Lado Izquierdo en HTML -> Queda a la DERECHA en PC */
-.contenido-destacado .lado-izq {
-    flex: 1.1;
-    text-align: right;
-}
-
-/* Lado Derecho en HTML -> Queda a la IZQUIERDA en PC */
 .contenido-destacado .lado-der {
-    flex: 1;
+    grid-column: 1;
+    grid-row: 1;
     text-align: left;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-/* Tipografía responsiva con tope máximo */
+.contenido-destacado .lado-izq {
+    grid-column: 3;
+    grid-row: 1;
+    text-align: right;
+}
+
 .destacado.info-bolsas h2 {
     color: #ffffff !important;
     font-size: clamp(1.4rem, 2vw, 1.9rem) !important;
@@ -118,37 +119,37 @@
     white-space: nowrap;
 }
 
+
+
 /* =========================================
-   ADAPTACIÓN RESPONSIVA (CELULARES)
+   ADAPTACIÓN PARA CELULARES
 ========================================= */
 @media (max-width: 768px) {
     .destacado.info-bolsas {
-        min-height: 320px;
-        padding: 35px 20px;
+        min-height: auto;
     }
 
     .slide-fondo {
-        background-size: 65% !important;
-    }
-
-    .capa-oscura {
-        background: rgba(2, 62, 138, 0.8) !important;
+        background-size: 180px auto !important;
+        background-position: center top 20px !important; /* bolsa arriba */
     }
 
     .destacado.info-bolsas .contenido-destacado {
-        flex-direction: column; /* En celular vuelven al orden vertical estándar */
-        gap: 20px;
+        grid-template-columns: 1fr;
+        row-gap: 20px;
+        padding-top: 220px; /* espacio para la bolsa */
         text-align: center;
     }
 
     .contenido-destacado .lado-izq,
     .contenido-destacado .lado-der {
+        grid-column: 1;
         text-align: center;
         align-items: center;
         width: 100%;
     }
 
-    .destacado.info-bolsas h2 {
-        font-size: 1.4rem !important;
-    }
+    /* Título primero, luego párrafo y botón */
+    .contenido-destacado .lado-izq { grid-row: 1; }
+    .contenido-destacado .lado-der { grid-row: 2; }
 }
